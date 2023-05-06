@@ -1,4 +1,6 @@
-
 __pycache__
-
-outputs/*
+output
+logs
+.DS_Store
+monotonic_align/monotonic_align/*
+monotonic_align/build/*

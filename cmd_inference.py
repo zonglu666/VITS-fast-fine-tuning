@@ -16,11 +16,9 @@ import utils
 from models import SynthesizerTrn
 import torch
 from torch import no_grad, LongTensor
-import librosa
-from text import text_to_sequence, _clean_text
+from text import text_to_sequence
 import commons
 import scipy.io.wavfile as wavf
-import os
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 
@@ -47,17 +45,17 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description='vits inference')
     #必须参数
-    parser.add_argument('-m', '--model_path', type=str, default="logs/44k/G_0.pth", help='模型路径')
+    parser.add_argument('-m', '--model_path', type=str, default="logs/32k/G_8200.pth", help='模型路径')
     parser.add_argument('-c', '--config_path', type=str, default="configs/config.json", help='配置文件路径')
     parser.add_argument('-o', '--output_path', type=str, default="output/vits", help='输出文件路径')
-    parser.add_argument('-l', '--language', type=str, default="日本語", help='输入的语言')
-    parser.add_argument('-t', '--text', type=str, help='输入文本')
-    parser.add_argument('-s', '--spk', type=str, help='合成目标说话人名称')
+    parser.add_argument('-l', '--language', type=str, default="简体中文", help='输入的语言')
+    parser.add_argument('-t', '--text', type=str, default="大家好，我是周立波。饭吃过了没有？我也没有吃过。现在，我们马上要开始，谈一些比较有意思的。谈一些比较敏感的，谈一些其他人，不敢谈的。我凭什么就敢谈。我们也不谈。我们谈点好玩的。先谈谈和大家生活息息相关的。都非常熟的。今天我来说说苹果。", help='输入文本')
+    parser.add_argument('-s', '--spk', type=str, default="libo-audio", help='合成目标说话人名称')
     #可选参数
     parser.add_argument('-on', '--output_name', type=str, default="output", help='输出文件的名称')
     parser.add_argument('-ns', '--noise_scale', type=float,default= .667,help='感情变化程度')
     parser.add_argument('-nsw', '--noise_scale_w', type=float,default=0.6, help='音素发音长度')
-    parser.add_argument('-ls', '--length_scale', type=float,default=1, help='整体语速')
+    parser.add_argument('-ls', '--length_scale', type=float,default=0.8, help='整体语速')
     
     args = parser.parse_args()
     
