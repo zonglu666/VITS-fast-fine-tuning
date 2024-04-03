@@ -2,5 +2,4 @@ __pycache__
 output
 logs
 .DS_Store
-monotonic_align/monotonic_align/*
 monotonic_align/build/*
